@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax23="http://model.aipos.zhuk.by/xsd" xmlns:ns="http://service.aipos.zhuk.by" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax21="http://io.java/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" targetNamespace="http://service.aipos.zhuk.by">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://model.aipos.zhuk.by/xsd">
+            <xs:complexType name="Article">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="body" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="codeExample" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="into" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://io.java/xsd">
+            <xs:complexType name="IOException">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="FileNotFoundException">
+                <xs:complexContent>
+                    <xs:extension base="ax21:IOException">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax22="http://io.java/xsd" xmlns:ax24="http://model.aipos.zhuk.by/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.aipos.zhuk.by">
+            <xs:import namespace="http://io.java/xsd"/>
+            <xs:import namespace="http://model.aipos.zhuk.by/xsd"/>
+            <xs:element name="ArticleServiceIOException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="IOException" nillable="true" type="ax22:IOException"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateArticle">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="articleThrift" nillable="true" type="ax24:Article"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ArticleServiceFileNotFoundException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="FileNotFoundException" nillable="true" type="ax22:FileNotFoundException"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="saveArticle">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="article" nillable="true" type="ax24:Article"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getArticlesName">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getArticlesNameResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getArticle">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getArticleResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax24:Article"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteArticle">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="updateArticleRequest">
+        <wsdl:part name="parameters" element="ns:updateArticle"/>
+    </wsdl:message>
+    <wsdl:message name="ArticleServiceIOException">
+        <wsdl:part name="parameters" element="ns:ArticleServiceIOException"/>
+    </wsdl:message>
+    <wsdl:message name="getArticlesNameRequest">
+        <wsdl:part name="parameters" element="ns:getArticlesName"/>
+    </wsdl:message>
+    <wsdl:message name="getArticlesNameResponse">
+        <wsdl:part name="parameters" element="ns:getArticlesNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getArticleRequest">
+        <wsdl:part name="parameters" element="ns:getArticle"/>
+    </wsdl:message>
+    <wsdl:message name="getArticleResponse">
+        <wsdl:part name="parameters" element="ns:getArticleResponse"/>
+    </wsdl:message>
+    <wsdl:message name="saveArticleRequest">
+        <wsdl:part name="parameters" element="ns:saveArticle"/>
+    </wsdl:message>
+    <wsdl:message name="ArticleServiceFileNotFoundException">
+        <wsdl:part name="parameters" element="ns:ArticleServiceFileNotFoundException"/>
+    </wsdl:message>
+    <wsdl:message name="deleteArticleRequest">
+        <wsdl:part name="parameters" element="ns:deleteArticle"/>
+    </wsdl:message>
+    <wsdl:portType name="ArticleServicePortType">
+        <wsdl:operation name="updateArticle">
+            <wsdl:input message="ns:updateArticleRequest" wsaw:Action="urn:updateArticle"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:updateArticleResponse"/>
+            <wsdl:fault message="ns:ArticleServiceIOException" name="ArticleServiceIOException" wsaw:Action="urn:updateArticleArticleServiceIOException"/>
+        </wsdl:operation>
+        <wsdl:operation name="getArticlesName">
+            <wsdl:input message="ns:getArticlesNameRequest" wsaw:Action="urn:getArticlesName"/>
+            <wsdl:output message="ns:getArticlesNameResponse" wsaw:Action="urn:getArticlesNameResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getArticle">
+            <wsdl:input message="ns:getArticleRequest" wsaw:Action="urn:getArticle"/>
+            <wsdl:output message="ns:getArticleResponse" wsaw:Action="urn:getArticleResponse"/>
+            <wsdl:fault message="ns:ArticleServiceIOException" name="ArticleServiceIOException" wsaw:Action="urn:getArticleArticleServiceIOException"/>
+        </wsdl:operation>
+        <wsdl:operation name="saveArticle">
+            <wsdl:input message="ns:saveArticleRequest" wsaw:Action="urn:saveArticle"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:saveArticleResponse"/>
+            <wsdl:fault message="ns:ArticleServiceFileNotFoundException" name="ArticleServiceFileNotFoundException" wsaw:Action="urn:saveArticleArticleServiceFileNotFoundException"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteArticle">
+            <wsdl:input message="ns:deleteArticleRequest" wsaw:Action="urn:deleteArticle"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:deleteArticleResponse"/>
+            <wsdl:fault message="ns:ArticleServiceIOException" name="ArticleServiceIOException" wsaw:Action="urn:deleteArticleArticleServiceIOException"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ArticleServiceSoap11Binding" type="ns:ArticleServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="updateArticle">
+            <soap:operation soapAction="urn:updateArticle" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceIOException">
+                <soap:fault use="literal" name="ArticleServiceIOException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getArticlesName">
+            <soap:operation soapAction="urn:getArticlesName" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getArticle">
+            <soap:operation soapAction="urn:getArticle" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceIOException">
+                <soap:fault use="literal" name="ArticleServiceIOException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="saveArticle">
+            <soap:operation soapAction="urn:saveArticle" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceFileNotFoundException">
+                <soap:fault use="literal" name="ArticleServiceFileNotFoundException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="deleteArticle">
+            <soap:operation soapAction="urn:deleteArticle" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceIOException">
+                <soap:fault use="literal" name="ArticleServiceIOException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ArticleServiceSoap12Binding" type="ns:ArticleServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="updateArticle">
+            <soap12:operation soapAction="urn:updateArticle" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceIOException">
+                <soap12:fault use="literal" name="ArticleServiceIOException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getArticlesName">
+            <soap12:operation soapAction="urn:getArticlesName" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getArticle">
+            <soap12:operation soapAction="urn:getArticle" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceIOException">
+                <soap12:fault use="literal" name="ArticleServiceIOException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="saveArticle">
+            <soap12:operation soapAction="urn:saveArticle" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceFileNotFoundException">
+                <soap12:fault use="literal" name="ArticleServiceFileNotFoundException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="deleteArticle">
+            <soap12:operation soapAction="urn:deleteArticle" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceIOException">
+                <soap12:fault use="literal" name="ArticleServiceIOException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ArticleServiceHttpBinding" type="ns:ArticleServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="updateArticle">
+            <http:operation location="updateArticle"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceIOException"/>
+        </wsdl:operation>
+        <wsdl:operation name="getArticlesName">
+            <http:operation location="getArticlesName"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getArticle">
+            <http:operation location="getArticle"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceIOException"/>
+        </wsdl:operation>
+        <wsdl:operation name="saveArticle">
+            <http:operation location="saveArticle"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceFileNotFoundException"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteArticle">
+            <http:operation location="deleteArticle"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+            <wsdl:fault name="ArticleServiceIOException"/>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ArticleService">
+        <wsdl:port name="ArticleServiceHttpSoap11Endpoint" binding="ns:ArticleServiceSoap11Binding">
+            <soap:address location="http://localhost:8080//services/by/zhuk/aipos/service/ArticleService"/>
+        </wsdl:port>
+        <wsdl:port name="ArticleServiceHttpSoap12Endpoint" binding="ns:ArticleServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080//services/by/zhuk/aipos/service/ArticleService"/>
+        </wsdl:port>
+        <wsdl:port name="ArticleServiceHttpEndpoint" binding="ns:ArticleServiceHttpBinding">
+            <http:address location="http://localhost:8080//services/by/zhuk/aipos/service/ArticleService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
